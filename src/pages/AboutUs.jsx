@@ -8,7 +8,7 @@ const AboutUs = () => {
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: '-100vw', opacity: 0 }}
       transition={{ duration: 0.6, ease: 'easeInOut' }}
-      className="min-h-screen px-6 py-20 md:px-20 bg-white text-black"
+      className="min-h-screen px-6 py-20 mt-20 md:px-20 bg-white text-black"
     >
       <h1 className="text-5xl font-bold mb-6">About FD Safe Doors</h1>
       <p className="text-lg leading-relaxed mb-4">
