@@ -1,8 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+
+// Components
+import Navbar from './components/Navbar';
 
 // Home page sections
-import Navbar from './components/Navbar';
 import Landing from './components/Landing';
 import { Marquee } from './components/Marquee';
 import Fdabout from './components/Fdabout';
@@ -24,7 +27,6 @@ function Home() {
 
   return (
     <div className="w-full h-screen text-black scroll-smooth">
-      <Navbar />
       <section id="home"><Landing /></section>
       <Marquee />
       <section id="services" className="scroll-mt-32"><Services /></section>
@@ -37,13 +39,24 @@ function Home() {
   );
 }
 
-function App() {
+const AnimatedRoutes = () => {
+  const location = useLocation();
+
   return (
-    <Router>
-      <Routes>
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/about-us" element={<AboutUs />} />
       </Routes>
+    </AnimatePresence>
+  );
+};
+
+function App() {
+  return (
+    <Router>
+      <Navbar /> {/* ✅ Always visible! */}
+      <AnimatedRoutes />
     </Router>
   );
 }
