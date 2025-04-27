@@ -34,20 +34,23 @@ function Navbar() {
     if (location.pathname !== '/') {
       navigate('/');
       setTimeout(() => {
-        const section = document.getElementById(id);
-        if (section) {
-          section.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 300);
+        const interval = setInterval(() => {
+          const section = document.getElementById(id);
+          if (section) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            clearInterval(interval);
+          }
+        }, 100); // Keep checking until section exists
+      }, 600); // Wait slightly longer for Home to load fully
     } else {
       const section = document.getElementById(id);
       if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
-    setMenuOpen(false); // Close menu after clicking
+    setMenuOpen(false); // close mobile menu
   };
-
+  
   return (
     <>
       <nav
