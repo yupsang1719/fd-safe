@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import ScrollToTop from './components/ScrollToTop';
+import ScrollToTop from './components/ScrollToTopF';
 import MainLayout from './layouts/MainLayout';
 
 // Sections for homepage
