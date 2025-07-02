@@ -2,27 +2,24 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
-// Components
-import Navbar from './components/Navbar';
 import ScrollToTop from './components/scrollToTop';
-import ScrollToTopButton from './components/ScrollToTopButton';
+import MainLayout from './layouts/MainLayout';
 
-// Home sections
+// Sections for homepage
 import Landing from './components/Landing';
 import { Marquee } from './components/Marquee';
 import Fdabout from './components/Fdabout';
 import Featured from './components/Featured';
 import Cards from './components/Cards';
-import { Fdfooter } from './components/Fdfooter';
 import Calltoaction from './components/Calltoaction';
 import Services from './components/services';
 
 // Pages
 import AboutUs from './pages/AboutUs';
+// import Projects from './pages/Projects'; // for future
 
-// Scroll
+// Optional scroll lib
 import LocomotiveScroll from 'locomotive-scroll';
-// import AshParticles from './components/AshParticles';
 
 function Home() {
   const locomotiveScroll = new LocomotiveScroll();
@@ -33,7 +30,6 @@ function Home() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6 }}
-      className="w-full h-screen text-black scroll-smooth"
     >
       <section id="home"><Landing /></section>
       <Marquee />
@@ -42,7 +38,6 @@ function Home() {
       <section id="projects" className="scroll-mt-32"><Featured /></section>
       <section id="insights" className="scroll-mt-32"><Cards /></section>
       <Calltoaction />
-      <section id="contact-us" className="scroll-mt-32"><Fdfooter /></section>
     </motion.div>
   );
 }
@@ -53,8 +48,9 @@ const AnimatedRoutes = () => {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
-        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/" element={<MainLayout><Home /></MainLayout>} />
+        <Route path="/about-us" element={<MainLayout><AboutUs /></MainLayout>} />
+        {/* <Route path="/projects" element={<MainLayout><Projects /></MainLayout>} /> */}
       </Routes>
     </AnimatePresence>
   );
@@ -64,9 +60,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <Navbar />
       <AnimatedRoutes />
-      <ScrollToTopButton />
     </Router>
   );
 }
